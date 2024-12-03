@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 import os
 
 
@@ -8,12 +8,12 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return 'Deployed!'
+    return render_template('home.html')
 
 
 @app.route('/about')
 def about():
-    return "This is the about page"
+    return render_template('about.html')
 
 
 
