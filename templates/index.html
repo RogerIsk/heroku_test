@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+    <script>
+        async function makeMove(row, col) {
+            const response = await fetch('/play', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ row, col })
+            });
+            const result = await response.json();
+            if (response.ok) {
+                document.getElementById(`${row}-${col}`).innerText = result.currentPlayer === "X" ? "O" : "X";
+                if (result.winner) alert(result.winner + " wins!");
+            } else {
+                alert(result.error || "Invalid move");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Tic Tac Toe</h1>
+    <table>
+        {% for row in range(3) %}
+        <tr>
+            {% for col in range(3) %}
+            <td id="{{ row }}-{{ col }}" onclick="makeMove({{ row }}, {{ col }})"></td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
