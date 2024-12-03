@@ -1,0 +1,13 @@
+button {
+    padding: 10px;
+    background-color: blue;
+    color: aqua;
+    border: 1cm;
+    border-radius: 5px;
+    cursor: crosshair;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: brown;
+}
